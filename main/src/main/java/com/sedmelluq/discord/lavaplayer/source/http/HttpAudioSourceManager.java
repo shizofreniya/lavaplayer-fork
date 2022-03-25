@@ -30,6 +30,7 @@ import java.util.function.Function;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.LaxRedirectStrategy;
 
 import static com.sedmelluq.discord.lavaplayer.container.MediaContainerDetectionResult.refer;
 import static com.sedmelluq.discord.lavaplayer.tools.FriendlyException.Severity.COMMON;
@@ -58,7 +59,7 @@ public class HttpAudioSourceManager extends ProbingAudioSourceManager implements
     httpInterfaceManager = new ThreadLocalHttpInterfaceManager(
         HttpClientTools
             .createSharedCookiesHttpBuilder()
-            .setRedirectStrategy(new HttpClientTools.NoRedirectsStrategy()),
+            .setRedirectStrategy(new LaxRedirectStrategy()),
         HttpClientTools.DEFAULT_REQUEST_CONFIG
     );
   }
